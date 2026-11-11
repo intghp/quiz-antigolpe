@@ -5,224 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp - Quiz Anti-golpe</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: #e9edef;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #111b21;
-        }
-
-        .phone-container {
-            width: 100%;
-            max-width: 410px;
-            height: 100%;
-            max-height: 840px;
-            background-color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
-            border: 1px solid #e9edef;
-        }
-
-        .chat-header {
-            background-color: #008069;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            padding: 0 16px 0 8px;
-            justify-content: space-between;
-            z-index: 10;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            max-width: 75%;
-            cursor: pointer;
-        }
-
-        .back-arrow {
-            font-size: 18px;
-            color: #ffffff;
-            padding: 4px;
-        }
-
-        .profile-pic {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: #dfe5e7;
-        }
-
-        .chat-details {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            margin-left: 4px;
-        }
-
-        .chat-title {
-            font-size: 16px;
-            font-weight: 500;
-            color: #ffffff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .chat-subtitle {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 22px;
-            color: #ffffff;
-            font-size: 18px;
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            background-color: #efeae2;
-            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .date-divider {
-            align-self: center;
-            background-color: #ffffff;
-            color: #54656f;
-            font-size: 12.5px;
-            padding: 6px 12px;
-            border-radius: 10px;
-            margin: 10px 0;
-            box-shadow: 0 1px 1px rgba(11,20,26,0.05);
-            text-transform: uppercase;
-        }
-
-        .message-row {
-            display: flex;
-            width: 100%;
-            justify-content: flex-start;
-        }
-
-        .message-bubble {
-            max-width: 85%;
-            padding: 6px 7px 8px 9px;
-            font-size: 14.2px;
-            color: #111b21;
-            line-height: 19px;
-            background-color: #ffffff;
-            border-radius: 0px 7.5px 7.5px 7.5px;
-            word-wrap: break-word;
-            box-shadow: 0 1px 1px rgba(11,20,26,0.1);
-            position: relative;
-        }
-
-        .message-bubble::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -8px;
-            width: 0;
-            height: 0;
-            border-top: 0px solid transparent;
-            border-bottom: 12px solid transparent;
-            border-right: 12px solid #ffffff;
-        }
-
-        .message-meta {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            font-size: 11px;
-            color: #667781;
-            margin-top: 4px;
-            margin-left: 12px;
-            float: right;
-        }
-
-        .chat-input-container {
-            padding: 5px 10px 10px 10px;
-            display: flex;
-            align-items: flex-end;
-            gap: 8px;
-            background-color: transparent;
-            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .input-bar {
-            flex: 1;
-            background-color: #ffffff;
-            border-radius: 24px;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-            padding: 0 12px;
-            gap: 16px;
-            box-shadow: 0 1px 1px rgba(11,20,26,0.1);
-        }
-
-        .icon-btn {
-            color: #8696a0;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        .message-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #111b21;
-            font-size: 16px;
-            padding: 12px 0;
-        }
-
-        .message-input::placeholder {
-            color: #8696a0;
-        }
-
-        .mic-button {
-            width: 48px;
-            height: 48px;
-            background-color: #00a884;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #ffffff;
-            box-shadow: 0 1px 3px rgba(11,20,26,0.2);
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -257,41 +40,26 @@
         </div>
     </div>
 
-    <div class="chat-input-container">
-        <div class="input-bar">
-            <i class="fa-regular fa-face-smile icon-btn"></i>
-            <input type="text" class="message-input" placeholder="Mensagem" disabled>
-            <i class="fa-solid fa-paperclip icon-btn" style="transform: rotate(-45deg);"></i>
-            <i class="fa-solid fa-camera icon-btn"></i>
-        </div>
-        <div class="mic-button">
-            <i class="fa-solid fa-microphone"></i>
+    <div class="decision-container">
+        <button onclick="verificarResposta(true)" class="btn-golpe">
+            <i class="fa-solid fa-triangle-exclamation"></i> GOLPE!
+        </button>
+        <button onclick="verificarResposta(false)" class="btn-seguro">
+            <i class="fa-solid fa-check"></i> SEGURO
+        </button>
+    </div>
+
+    <div id="modal-feedback" class="modal hidden">
+        <div class="modal-content">
+            <div id="modal-icone"></div>
+            <h2 id="modal-titulo"></h2>
+            <p id="modal-explicacao"></p>
+            <button onclick="proximaRodada()" class="btn-continuar">Continuar</button>
         </div>
     </div>
 
 </div>
 
-<script>
-    const dadosDaRodada = {
-        nome: "Suporte Caixa",
-        numero: "+55 11 9999-9999",
-        fotoUrl: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-        dia: "HOJE",
-        horario: "14:30",
-        conteudo: "Identificamos um acesso suspeito na sua conta. Clique no link para verificar: http://caixa-seguranca-br.com/login"
-    };
-
-    function carregarRodada(dados) {
-        document.getElementById("var-nome").innerText = dados.nome;
-        document.getElementById("var-numero").innerText = dados.numero;
-        document.getElementById("var-foto").src = dados.fotoUrl;
-        document.getElementById("var-dia").innerText = dados.dia;
-        document.getElementById("var-horario").innerText = dados.horario;
-        document.getElementById("var-conteudo").innerText = dados.conteudo;
-    }
-
-    carregarRodada(dadosDaRodada);
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
